@@ -1,10 +1,12 @@
-export const Sum = (a, b) => {
-  return a + b;
-};
+export const Sum = (a, b) => a + b;
 
 export const xor = (a, b) => {
   return a | b && !a | !b ? true : false;
 };
+
+export const Prod = (a, b) => a * b;
+
+export const Sub = (a, b) => a - b;
 
 // To sort an array by ascending order
 export const Desc = (a, b) => {
@@ -43,17 +45,7 @@ export const ArrSub = (arr1, arr2) => {
 
 // Given two arrays, tells if they have the exact same values
 export const Equals = (arr1, arr2) => {
-  let l = arr1.length;
-  if (arr2.length !== l) {
-    return false;
-  }
-  let keep = true;
-  for (let i = 0; i < l; i++) {
-    if (arr1[i] !== arr2[i]) {
-      keep = false;
-    }
-  }
-  return keep;
+  return JSON.stringify(arr1) === JSON.stringify(arr2);
 };
 
 // AofA means Array of arrays
