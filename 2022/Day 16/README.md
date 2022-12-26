@@ -14,7 +14,7 @@ From a starting valve, go in each available direction. If we encouter a valve wi
 Else, repeat this process from the current valve.
 
 In the example this leads to the gray valves in the next figure if we start from the initial position :
-(https://github.com/NuageTompis/Advent-of-Code/blob/main/2022/Day%2016/Explanation.jpg)
+![Figure 1](https://github.com/NuageTompis/Advent-of-Code/blob/main/2022/Day%2016/Explanation.jpg)
 
 We make 2 recursions from each option : one where we open the valve and another where we don't.
 
