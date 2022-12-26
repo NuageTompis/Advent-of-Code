@@ -57,3 +57,16 @@ export const RemoveDuplicatesOfSortedAofA = (arr) => {
     return !Equals(array, arr[ind - 1]);
   });
 };
+
+// Returns the permutation array of an array
+export const Perms = (arr) => {
+  if (arr.length === 1) return arr;
+  let perm = new Array(0);
+  let childPerm;
+  for (let i = 0; i < arr.length; i++) {
+    childPerm = Perms(arr.slice(0, i).concat(arr.slice(i + 1)));
+    for (let k = 0; k < childPerm.length; k++)
+      perm.push([arr[i]].concat(childPerm[k]));
+  }
+  return perm;
+};
