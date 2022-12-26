@@ -95,7 +95,7 @@ const OverallFlow = (path) => {
   let ind = 0;
   let valve = "AA";
   let nextValve, dist;
-  while (ind < path.length && minutes > 1) {
+  while (ind < path.length) {
     nextValve = GetValve(path[ind]);
     dist = Distances.get(valve).get(nextValve);
     minutes -= dist;
