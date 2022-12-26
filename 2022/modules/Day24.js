@@ -1,16 +1,11 @@
 import { readFileSync } from "fs";
 import { ArrSum, Equals } from "./UT.js";
+let start = Date.now();
 
-export const Day24 = (offset, pb, BestScore) => {
-  let input;
-  switch (pb) {
-    case "day":
-      input = readFileSync("Day24.txt", "utf-8").trim().split("\r\n");
-      break;
-    case "ex":
-      input = readFileSync("Day24ex.txt", "utf-8").trim().split("\r\n");
-      break;
-  }
+export const Day24 = (offset) => {
+  let UpperBound = 250;
+
+  let input = readFileSync("Day24.txt", "utf-8").trim().split("\r\n");
   const L = input.length - 2;
   const C = input[0].length - 2;
 
@@ -54,10 +49,11 @@ export const Day24 = (offset, pb, BestScore) => {
   }
 
   let MAPS = new Array(0);
-  for (let i = 0; i < BestScore + offset; i++) {
+  for (let i = 0; i < UpperBound + offset; i++) {
     map = UpdateMap(map);
     MAPS.push(map);
   }
+
   MAPS = MAPS.slice(offset);
 
   let S = [-1, 0];
@@ -66,6 +62,7 @@ export const Day24 = (offset, pb, BestScore) => {
   const Manhattan = (P1, P2) =>
     Math.abs(P2[1] - P1[1]) + Math.abs(P2[0] - P1[0]);
 
+  // DN stands for direct neighbors
   let DN = new Map();
   DN.set("N", [-1, 0]);
   DN.set("S", [1, 0]);
@@ -80,16 +77,23 @@ export const Day24 = (offset, pb, BestScore) => {
 
     let distanceToEnd = Manhattan(pos, E);
     if (distanceToEnd === 1) {
-      if (minutes + 1 < BestScore);
-      BestScore = minutes + 1;
+      if (minutes + 1 < UpperBound);
+      UpperBound = minutes + 1;
       return minutes + 1;
     }
 
-    if (minutes + distanceToEnd >= BestScore) return Infinity;
+    if (minutes + distanceToEnd >= UpperBound) return Infinity;
 
     let posToCheck = new Array(0);
     posToCheck.push(pos);
-    if (Equals(pos, S)) posToCheck.push(ArrSum(pos, DN.get("S")));
+    if (pos[0] > 0 && pos[0] < L - 1 && pos[1] > 0 && pos[1] < C - 1)
+      posToCheck = posToCheck.concat([
+        ArrSum(pos, DN.get("N")),
+        ArrSum(pos, DN.get("S")),
+        ArrSum(pos, DN.get("E")),
+        ArrSum(pos, DN.get("W")),
+      ]);
+    else if (Equals(pos, S)) posToCheck.push(ArrSum(pos, DN.get("S")));
     else if (Equals(pos, [0, 0]))
       posToCheck = posToCheck.concat([
         ArrSum(pos, DN.get("S")),
@@ -128,18 +132,11 @@ export const Day24 = (offset, pb, BestScore) => {
         ArrSum(pos, DN.get("N")),
         ArrSum(pos, DN.get("E")),
       ]);
-    else if (pos[1] === C - 1)
+    if (pos[1] === C - 1)
       posToCheck = posToCheck.concat([
         ArrSum(pos, DN.get("S")),
         ArrSum(pos, DN.get("W")),
         ArrSum(pos, DN.get("N")),
-      ]);
-    else
-      posToCheck = posToCheck.concat([
-        ArrSum(pos, DN.get("N")),
-        ArrSum(pos, DN.get("S")),
-        ArrSum(pos, DN.get("E")),
-        ArrSum(pos, DN.get("W")),
       ]);
 
     let blizzards = MAPS[minutes].filter((e, i) => i % 2 === 0);
@@ -155,5 +152,15 @@ export const Day24 = (offset, pb, BestScore) => {
     return Math.min(...options);
   };
 
-  return FindBest(S, 0);
+  let answer;
+  while (true) {
+    answer = FindBest(S, 0);
+    if (answer !== Infinity) return answer;
+    for (let i = 0; i < 10; i++) {
+      map = UpdateMap(map);
+      MAPS.push(map);
+    }
+    States = new Array(0);
+    UpperBound += 10;
+  }
 };
