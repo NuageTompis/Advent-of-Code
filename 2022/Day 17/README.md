@@ -1,3 +1,11 @@
+# Disclaimer
+
+What you are going to read for Part 2 is wrong, in the sense that my initial idea worked for my puzzle input (and many other I think) but not necessarely for every input. I fixed my script to work for every input and documented it in the last section of this README markdown. 
+To summarize my work, here are the script I edited for Part 2 :
+  - Day17IBelieve.js : the script that led to the solution initially
+  - Day17Part2.js : the general script that I though would work no matter the input
+  - Day17Part2Corrected.js : the fixed version of the previous script
+
 # Day 17
 
 This problem was very amusing. For the first part, I simply did a simulation of the tower without any simplication.
@@ -40,3 +48,16 @@ The total amount of rocks, which is 10^12, is the sum of the following :
 
 Each number can be computed through euclidian division.
 To retrieve the answer to the problem, we then need to know the height added during each phase and print their sum.
+
+# Correction
+
+As you may have guessed, my solution will not work for a puzzle input that has a cycle which doesn't include a step that fills the top of the tower as an entire line.
+
+To fix this issue, I changed my way of finding a cycle (and made it much more efficient aswell) by keeping in memory the state of each step.
+
+I describe a step as a unique combinaison of the following :
+  - a "tower shape" : the floor shape at the top of the tower
+  - an instruction index : the current index in the puzzle input
+  - a rock index : the current rock shape
+
+This being said, if at some point we find ourselves at a state that was already made, then we are going to begin a cycle for eternity.
