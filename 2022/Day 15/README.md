@@ -9,7 +9,7 @@ There are 3 distincs cases :
   - The distance to the beacon is inferior to the distance to the point at y=Y (see sensor S2 in the picture) -> we neglect this sensor
   - The distance to the beacon is greater than the distance to the point at y=Y BUT either the beacon or the sensor is at y=Y (see sensor S3 in the picture) -> we do the same as for case 1 but we also store the position of the element which is at y=Y. We will substract one to the final result
   
-        ![Figure 1](https://github.com/NuageTompis/Advent-of-Code/blob/754da9aa2c617098acdbe7ec075bad5ee9c949bd/2022/Day%2015/Explanations.jpg)
+        ![Figure 1](https://github.com/NuageTompis/Advent-of-Code/blob/main/2022/Day%2015/Explanations.jpg)
 
   
   Finally, we merge the retrieved intervals and print the sum of their lenght (minus the potential elements coming from case 3)
