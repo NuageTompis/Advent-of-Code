@@ -13,4 +13,6 @@ I then repeated this process by comparing right to the value of left if humn was
 
 At some point I had an interval In=[0,2^n] (see picture) that included the wanted value of humn.
 
+![Figure 1](https://github.com/NuageTompis/Advent-of-Code/blob/main/2022/Day%2021/Explanations.jpg)
+
 From there I used dichotomy to find a value of humn that satisfied right=left(humn)
