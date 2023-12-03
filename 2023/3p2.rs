@@ -22,7 +22,6 @@ fn main() {
         let mut to_add = false;
         let mut was_star = false;
 
-
         let mut ndc_to_add = Vec::new();
         let mut j = 0;
         for c in line.chars() {

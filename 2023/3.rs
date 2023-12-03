@@ -12,7 +12,6 @@ fn main() {
         let mut curr_nbs = Vec::new();
         let mut curr_ndc = Vec::<i32>::new();
         let len = line.len() as i32;
-        
         let mut v = 0;
         // First and last indices of the number
         let mut fst_ndx: i32 = 0;
