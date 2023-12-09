@@ -4,12 +4,12 @@ use std::io::{self, BufRead};
 fn main() {
     let file = File::open("input.txt").expect("Failed to open input file");
     let lines: Vec<String> = io::BufReader::new(file).lines().map(|line| line.expect("Failed to read line")).collect();
-    let times: Vec<i32> = lines[0].split_whitespace().skip(1).map(|word| word.parse().unwrap()).collect();
-    let dists: Vec<i32> = lines[1].split_whitespace().skip(1).map(|word| word.parse().unwrap()).collect();
+    let times: Vec<f64> = lines[0].split_whitespace().skip(1).map(|word| word.parse().unwrap()).collect();
+    let dists: Vec<f64> = lines[1].split_whitespace().skip(1).map(|word| word.parse().unwrap()).collect();
 
     let mut p2 = 1;
     for i in 0..times.len() {
-        p2 *= compute_range(times[i] as f64, dists[i] as f64);
+        p2 *= compute_range(times[i], dists[i]);
     }
 
     println!("{}", p2);
