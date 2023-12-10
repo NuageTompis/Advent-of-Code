@@ -30,8 +30,8 @@ Here are my solutions for the AoC 2023 problems. I've opted for Rust :crab: this
 | 7   | :white_check_mark:   |  :white_check_mark:  | :clock430: |     :star:  :star:      |
 | 8   | :white_check_mark:   |     :clock430:       | :clock430: |                         |
 | 9   | :white_check_mark:   |  :white_check_mark:  |    :x:     |                         |
-| 10  | :white_check_mark:   |  :white_check_mark:  | :clock430: |     :star:  :star:      |
-| 11  |                      |  :white_check_mark:  |            |                         |
+| 10  | :white_check_mark:   |     :clock430:       | :clock430: |     :star:  :star:      |
+| 11  |                      |                      |            |                         |
 | 12  |                      |                      |            |                         |
 | 13  |                      |                      |            |                         |
 | 14  |                      |                      |            |                         |
