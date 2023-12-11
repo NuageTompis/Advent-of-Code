@@ -26,7 +26,7 @@ Here are my solutions for the AoC 2023 problems. I've opted for Rust :crab: this
 | 3   | :white_check_mark:   |  :white_check_mark:  | :clock430:       |                         | `1.04ms` - `2.09ms`  |
 | 4   | :white_check_mark:   |  :white_check_mark:  |    :x:           |                         | `3.41ms` - `2.61ms`  |
 | 5   | :white_check_mark:   |     :clock430:       | :clock430:       |                         |_requires improvement_|
-| 6   | :white_check_mark:   |  :white_check_mark:  |:white_check_mark:|        :star:           | `299µs` - `250µs`    |
+| 6   | :white_check_mark:   |  :white_check_mark:  |[:white_check_mark:](6)|        :star:           | `299µs` - `250µs`    |
 | 7   | :white_check_mark:   |  :white_check_mark:  | :clock430:       |     :star:  :star:      |_requires improvement_|
 | 8   | :white_check_mark:   |     :clock430:       | :clock430:       |                         |_requires improvement_|
 | 9   | :white_check_mark:   |  :white_check_mark:  |    :x:           |                         | `2.15ms` - `3.96ms   |
@@ -52,7 +52,7 @@ Here are my solutions for the AoC 2023 problems. I've opted for Rust :crab: this
 <br>
 
 <details>
-<summary>Day 6</summary>
+<summary id="6">Day 6</summary>
 <br>
  
 To determine the number of ways to win a race, we consider the score $s_k$ achieved by pressing the button for $k$ milliseconds. This score is calculated by multiplying the duration the button is pressed $k$ by the remaining time $T - k$, where $T$ is the total race duration.
