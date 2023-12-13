@@ -47,7 +47,7 @@ Here are my solutions for the AoC 2023 problems. I've opted for Rust :crab: this
 | 24  |                      |                      |                        |                         |                      |
 | 25  |                      |                      |                        |                         |                      |
 
- > Note (*) : Using a single computing time, with a Intel Core i7-13700H (1.8 - 2.4GHz)
+ > Note (*) : Using a single computing time, with a Intel Core i7-13700H (1.8 - 2.4GHz), unoptimized (default rustc build).
 
 <br>
 
