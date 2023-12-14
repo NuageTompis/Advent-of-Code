@@ -19,35 +19,35 @@ Here are my solutions for the AoC 2023 problems. I've opted for Rust :crab: this
 
 # Progress
 
-| Day | Done (both parts)    | Pushed               | Detailed         | Elegance of my approach | Benchmarks (*)       |
-|-----|----------------------|----------------------|------------------|-------------------------|--------------------- | 
-| 1   | :white_check_mark:   |  :white_check_mark:  |    :x:           |                         | `1.01ms` - `3.15ms`  |
-| 2   | :white_check_mark:   |  :white_check_mark:  |    :x:           |                         | `1.21ms` - `1.80ms`  |
-| 3   | :white_check_mark:   |  :white_check_mark:  | :clock430:       |                         | `1.04ms` - `2.09ms`  |
-| 4   | :white_check_mark:   |  :white_check_mark:  |    :x:           |                         | `3.41ms` - `2.61ms`  |
-| 5   | :white_check_mark:   |     :clock430:       | :clock430:       |                         |_requires improvement_|
+| Day | Done (both parts)    | Pushed               | Detailed               | Elegance of my approach | Benchmarks (*)       |
+|-----|----------------------|----------------------|------------------------|-------------------------|--------------------- | 
+| 1   | :white_check_mark:   |  :white_check_mark:  |    :x:                 |                         | `1.01ms` - `3.15ms`  |
+| 2   | :white_check_mark:   |  :white_check_mark:  |    :x:                 |                         | `1.21ms` - `1.80ms`  |
+| 3   | :white_check_mark:   |  :white_check_mark:  | :clock430:             |                         | `1.04ms` - `2.09ms`  |
+| 4   | :white_check_mark:   |  :white_check_mark:  |    :x:                 |                         | `3.41ms` - `2.61ms`  |
+| 5   | :white_check_mark:   |     :clock430:       | :clock430:             |                         |_requires improvement_|
 | 6   | :white_check_mark:   |  :white_check_mark:  |[:white_check_mark:](#6)|        :star:           | `299µs` - `250µs`    |
-| 7   | :white_check_mark:   |  :white_check_mark:  | :clock430:       |     :star:  :star:      |_requires improvement_|
-| 8   | :white_check_mark:   |     :clock430:       | :clock430:       |                         |_requires improvement_|
-| 9   | :white_check_mark:   |  :white_check_mark:  |    :x:           |                         | `2.15ms` - `3.96ms   |
-| 10  | :white_check_mark:   |     :clock430:       | :clock430:       |     :star:  :star:      |_requires improvement_|
-| 11  | :white_check_mark:   |  :white_check_mark:  |    :x:           |                         | `3.48ms` - `3.253ms` |
-| 12  |                      |                      |                  |                         |                      |
-| 13  |                      |                      |                  |                         |                      |
-| 14  |                      |                      |                  |                         |                      |
-| 15  |                      |                      |                  |                         |                      |
-| 16  |                      |                      |                  |                         |                      |
-| 17  |                      |                      |                  |                         |                      |
-| 18  |                      |                      |                  |                         |                      |
-| 19  |                      |                      |                  |                         |                      |
-| 20  |                      |                      |                  |                         |                      |
-| 21  |                      |                      |                  |                         |                      |
-| 22  |                      |                      |                  |                         |                      |
-| 23  |                      |                      |                  |                         |                      |
-| 24  |                      |                      |                  |                         |                      |
-| 25  |                      |                      |                  |                         |                      |
+| 7   | :white_check_mark:   |  :white_check_mark:  | :clock430:             |     :star:  :star:      |_requires improvement_|
+| 8   | :white_check_mark:   |     :clock430:       | :clock430:             |                         |_requires improvement_|
+| 9   | :white_check_mark:   |  :white_check_mark:  |    :x:                 |                         | `2.15ms` - `3.96ms`  |
+| 10  | :white_check_mark:   |     :clock430:       | :clock430:             |     :star:  :star:      |_requires improvement_|
+| 11  | :white_check_mark:   |  :white_check_mark:  |    :x:                 |                         | `3.48ms` - `3.253ms` |
+| 12  | :white_check_mark:   |     :clock430:       |                        |                         |                      |
+| 13  | :white_check_mark:   | :white_check_mark:   |    :x:                 |                         | `1.06ms` - `899µs`   |
+| 14  |                      |                      |                        |                         |                      |
+| 15  |                      |                      |                        |                         |                      |
+| 16  |                      |                      |                        |                         |                      |
+| 17  |                      |                      |                        |                         |                      |
+| 18  |                      |                      |                        |                         |                      |
+| 19  |                      |                      |                        |                         |                      |
+| 20  |                      |                      |                        |                         |                      |
+| 21  |                      |                      |                        |                         |                      |
+| 22  |                      |                      |                        |                         |                      |
+| 23  |                      |                      |                        |                         |                      |
+| 24  |                      |                      |                        |                         |                      |
+| 25  |                      |                      |                        |                         |                      |
 
- > Note (*) : Using a single computing time, with a Intel Core i7-13700H (1.8 - 2.4GHz)
+ > Note (*) : Using a single computing time, with a Intel Core i7-13700H (1.8 - 2.4GHz), unoptimized (default rustc build).
 
 <br>
 
