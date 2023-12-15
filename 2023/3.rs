@@ -1,8 +1,10 @@
 use std::fs::read_to_string;
+use std::time::Instant;
 
 fn main() {
+    let start_time = Instant::now();
+    
     let mut sum = 0;
-
     // Previous numbers from previous line
     let mut prev_nb = Vec::new();
     // Symbols indices from previous line
@@ -84,7 +86,7 @@ fn main() {
         prev_ndc = curr_ndc.clone();
     }
 
-    println!("{sum}");
+    println!("{} in {:?}", sum, start_time.elapsed());   
 }
 
 fn scan_prev_ndc(prev_ndc: &Vec<i32>, curr_nbs: &mut Vec<(i32, i32, i32)>, sum: &mut i32, v: i32, fst_ndx: i32, lst_ndx: i32) {

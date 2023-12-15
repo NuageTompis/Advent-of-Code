@@ -1,14 +1,17 @@
+use std::time::Instant;
 use std::fs::File;
 use std::io::{self, BufRead};
 
 fn main() {
+    let start_time = Instant::now();
+
     if let (Some(times_str), Some(dists_str)) = (lines().nth(0), lines().nth(1)) {
         let time_str: String = times_str.split_whitespace().skip(1).filter(|&word| !word.is_empty()).collect();
         let dist_str: String = dists_str.split_whitespace().skip(1).filter(|&word| !word.is_empty()).collect();
         
         if let (Ok(time), Ok(dist)) = (time_str.parse::<f64>(), dist_str.parse::<f64>()) {
             let score = compute_range(time, dist);
-            println!("{}", score);
+            println!("{} in {:?}", score, start_time.elapsed());
         }
     }
 }

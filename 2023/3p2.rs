@@ -1,6 +1,8 @@
 use std::fs::read_to_string;
+use std::time::Instant;
 
 fn main() {
+    let start_time = Instant::now();
     let mut sum = 0;
 
     let mut prev_nb = Vec::new();
@@ -136,5 +138,5 @@ fn main() {
         }
     }
 
-    println!("{sum}");
+    println!("{} in {:?}", sum, start_time.elapsed());
 }

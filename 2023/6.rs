@@ -1,7 +1,10 @@
 use std::fs::File;
 use std::io::{self, BufRead};
+use std::time::Instant;
 
 fn main() {
+    let start_time = Instant::now();
+
     let file = File::open("input.txt").expect("Failed to open input file");
     let lines: Vec<String> = io::BufReader::new(file).lines().map(|line| line.expect("Failed to read line")).collect();
     let times: Vec<f64> = lines[0].split_whitespace().skip(1).map(|word| word.parse().unwrap()).collect();
@@ -12,7 +15,7 @@ fn main() {
         p2 *= compute_range(times[i], dists[i]);
     }
 
-    println!("{}", p2);
+    println!("{} in {:?}", p2, start_time.elapsed());   
 }
 
 fn compute_range(l: f64, s: f64) -> i64 {

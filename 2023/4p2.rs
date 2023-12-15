@@ -1,6 +1,9 @@
 use std::fs::read_to_string;
+use std::time::Instant;
 
 fn main() {
+    let start_time = Instant::now();
+
     let binding = read_to_string("./input.txt").unwrap();
     let lines = binding.lines();
     let amt = lines.clone().count();
@@ -70,5 +73,5 @@ fn main() {
         id += 1;
     }
     
-    println!("{}", card_instances.iter().sum::<i32>());
+    println!("{} in {:?}", card_instances.iter().sum::<i32>(), start_time.elapsed());
 }

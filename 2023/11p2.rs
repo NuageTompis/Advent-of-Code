@@ -4,9 +4,9 @@ use std::collections::HashMap;
 
 fn main() {
     let start_time = Instant::now();
+    
     let mut els: Vec<(i64, i64)> = Vec::new();
     let offset = 1000000 - 1;
-
     let binding = read_to_string("./input.txt").unwrap();
     let l = binding.lines().nth(0).unwrap().len();
     

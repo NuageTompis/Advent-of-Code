@@ -4,8 +4,8 @@ use std::collections::HashMap;
 
 fn main() {
     let start_time = Instant::now();
+    
     let mut els: Vec<(i32, i32)> = Vec::new();
-
     let binding = read_to_string("./input.txt").unwrap();
     let l = binding.lines().nth(0).unwrap().len();
     
