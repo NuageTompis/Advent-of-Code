@@ -116,7 +116,7 @@ A_{P_-} = |\sum_{i=1}^{\frac{n}{2}} x_{2i}y_{2i+1}-y_{2i}x_{2i+1}|
 $$
 
 Ok that's nice, but how do we get the area of $P$, $A_P$, from $A_{P_-}$ ?
-Looking at the following image, what we can do this by summing the area of $P_-$ _(in green)_ with the  outside area of $P$ _(blue + green)_
+Looking at the following image, we can do this by summing the area of $P_-$ _(in green)_ with the  outside area of $P$ _(blue)_
 
 <a id="p-and-p-minus"></a>
 $P$ and $P_-$
