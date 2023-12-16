@@ -152,7 +152,7 @@ When drawing a polygon with only $90$ degrees edges, you can think of it as draw
 With this in mind, there must be exactly $4$ "good" turns more than "bad" ones in order to complete the polygon. You can convice yourself that "good" turns represent the `outer` vertices, while "bad" turns represent the `inner` ones. So, to know which vertices are `outer` and which are `inner`, we can just count the number of left turns and right turns, whichever has the most is the "good" turn.
 
 And ... that's it ! This is exactly what the script `10p2_v1.rs` inside `Former Versions` does. But yes, this is a former version, it turns out we can do slightly better.
-Consider [$P$ and $P_-$](#P-and-P-minus) once again. We actually don't need $P$ at all, we can simply get the area of $P_-$ and substract the part of this area that corresponds to the loop tiles ! Contrary to earlier, the outer vertices account for $\frac{1}{4}$ of a unit whereas the inner ones account for $\frac{3}{4}$ of a unit.
+Consider [P and P_](#P-and-P-minus) once again. We actually don't need $P$ at all, we can simply get the area of $P_-$ and substract the part of this area that corresponds to the loop tiles ! Contrary to earlier, the outer vertices account for $\frac{1}{4}$ of a unit whereas the inner ones account for $\frac{3}{4}$ of a unit.
 
 Thus, the area we're looking for (the enclosed area) becomes :
 
@@ -178,7 +178,7 @@ $$
 A_e = |\sum_{i=1}^{\frac{n}{2}} x_{2i}y_{2i+1}-y_{2i}x_{2i+1}| - \frac{l}{2} + 1
 $$
 
- > l is the amount of tiles of the loop  
+ > $l$ is the amount of tiles of the loop  
 $(x_i, y_i)$ are the positions of the vertices of the loop
 
 [:leftwards_arrow_with_hook:](#progress)
