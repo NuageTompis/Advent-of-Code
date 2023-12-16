@@ -140,7 +140,7 @@ To find $v_o$ and $v_i$, let's think about how we draw a _only-90 degrees_ polyg
 |-------------------------|---------------------------|---------------------------|---------------------------|
  ![Four](Images/10_4.png) | ![Five](Images/10_5.png)  | ![Six](Images/10_6.png)   | ![Seven](Images/10_7.png) |
 
-If after _Step 3_, we instead dediced to turn left, we would have had to make $2$ more right turns to complete the shape, this would have looked a bit like so :
+If after _Step 3_, if we instead dediced to turn left, we would have had to make $2$ more right turns to complete the shape, this would have looked a bit like so :
 
 | Step 3                        | Step 4                    | Step 5                    | Step 6                    |
 |-------------------------------|---------------------------|---------------------------|---------------------------|
