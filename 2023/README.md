@@ -49,10 +49,10 @@ Here are my solutions for the AoC 2023 problems. I've opted for Rust :crab: this
 
  > Note (*) : Using a single computing time, with a Intel Core i7-13700H (1.8 - 2.4GHz), unoptimized (default rustc build).
 
-<br>
+<br><br>
 
-<details>
-<summary id="6">Day 6</summary>
+<a id="6"></a>
+## Day 6
 <br>
  
 To determine the number of ways to win a race, we consider the score $s_k$ achieved by pressing the button for $k$ milliseconds. This score is calculated by multiplying the duration the button is pressed $k$ by the remaining time $T - k$, where $T$ is the total race duration.
@@ -73,13 +73,12 @@ The solution to the problem is then the count of integers within the range $[x_-
 
 To find the solution, we calculate $\lceil x_+ \rceil - \lfloor x_- \rfloor + 1.$
 
+[:leftwards_arrow_with_hook:](#progress)
 
-</details>
+<br><br>
 
-<br>
-
-<details>
-<summary id="10">Day 10</summary>
+<a id="10"></a>
+## Day 10
 <br>
  
 I found this problem quite stimulating. After reading the question, I instantly thought that, once the loop was fully determined, there was a way to compute the amount of enclosed tiles without having to go through each element over again.
@@ -182,10 +181,9 @@ $$
  > l is the amount of tiles of the loop  
 $(x_i, y_i)$ are the positions of the vertices of the loop
 
+[:leftwards_arrow_with_hook:](#progress)
 
-
-</details>
- 
+ <br><br>
 
 
 :octocat:
