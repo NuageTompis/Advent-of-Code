@@ -125,7 +125,7 @@ $P$ and $P_-$
 
 To find the outside area in blue, let's consider the vertices of the polygon in dashed line, $P_-$. There are $2$ kinds of vertices, the  `outer` ones (pointing _outside_ of the polygon), and the `inner` ones (pointing _inside_). In the previous pictures there are $8$ outer vertices and $4$ inner ones. You can see that the tile of the outer vertices each account for an area of $\frac{3}{4}$ in blue whereas the inner ones only account for an area of $\frac{1}{4}$. The remaining tiles in the loop account for an area of $\frac{1}{2}$. 
 
-And there you have it ! To find the area enclosed by the loop, compute the area of $P$ with $A_P = A_{P_-} + A_o$ _(where $A_o$ is the oustide area, in blue)_, and substract to it the amount of elements that constitute the loop.
+And there you have it ! To find the area enclosed by the loop, compute the area of $P$ with $A_P = A_{P_-} + A_o$ _(where_ $A_o$ _is the oustide area, in blue)_, and substract to it the amount of elements that constitute the loop.
 
 We can express $A_o$ as follows, where $v_o$ is the amount of `outside` vertices of the loop, $v_i$ the amount of `inner` vertices, and $l$ is the number of loop elements :
 
