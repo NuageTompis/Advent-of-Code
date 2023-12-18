@@ -20,44 +20,15 @@ fn main() {
         matrix.push(row);
     }
 
-    let mut max = 0;
-    body(&mut memo, &matrix, 0, 0, 1);
-    for start_i in 0..matrix.len() {
-        // Go right from 0 to end on start_i
-        memo.clear();
-        let val = body(&mut memo, &matrix, start_i, 0, 1);
-        if val > max {
-            max = val;
-        }
-        // Go left from end to 0 on start_i
-        memo.clear();
-        let val = body(&mut memo, &matrix, start_i, matrix[0].len() - 1, 3);
-        if val > max {
-            max = val;
-        }
-    }
-    for start_j in 0..matrix[0].len() {
-        // Go down from 0 to end on start_j
-        memo.clear();
-        let val = body(&mut memo, &matrix, 0, start_j, 2);
-        if val > max {
-            max = val;
-        }
-        // Go up from end to 0 on start_j
-        memo.clear();
-        let val = body(&mut memo, &matrix, matrix.len() - 1, start_j, 0);
-        if val > max {
-            max = val;
-        }
-    }
-    // later use the memo and create a new hashmap for the visited ! -> meh
-
-    println!("{} in {:?}", max, start_time.elapsed());
-
+    
+    let sum = body(&mut memo, &matrix, 0, 0, 1);
+    println!("{} in {:?}", sum, start_time.elapsed());
 }
 
 fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, matrix: &Vec<Vec<char>>, i_start: usize, j_start: usize, dir_start: usize) -> u32 {
     let mut beams: Vec<(usize, usize, usize)> = vec![(i_start, j_start, dir_start)];
+    let n: usize = matrix.len();
+    let m: usize = matrix[0].len();
 
     loop {
         let mut new_beams: Vec<(usize, usize, usize)> = Vec::new();
@@ -84,35 +55,35 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
     
                     if dir == 1 || dir == 3 {
                         if i != 0 {
-                            let mut found = false;
-                            for i_2 in (0..=i-1).rev() {
-                                let pipe_2 = matrix[i_2][j];
-                                if pipe_2 != '.' {
-                                    let state = (i_2, j, 0);
-                                    states.push(state);
-                                    found = true;
-                                    break;
+                                let mut found = false;
+                                for i_2 in (0..=i-1).rev() {
+                                    let pipe_2 = matrix[i_2][j];
+                                    if pipe_2 != '.' {
+                                        let state = (i_2, j, 0);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+                                    }
                                 }
-                            }
-                            if !found {
-                                states.push((0, j, 0));
-                            }
-                    }
-                        if i != matrix.len() as usize - 1 {
-                            let mut found = false;
-                            for i_2 in i+1..matrix.len() { 
-                                let pipe_2 = matrix[i_2][j];
-                                if pipe_2 != '.'  {
-                                    let state = (i_2, j, 2);
-                                    states.push(state);
-                                    found = true;
-                                    break;
-
+                                if !found {
+                                    states.push((0, j, 0));
                                 }
-                            }
-                            if !found {
-                                states.push((matrix.len() - 1, j, 2))
-                            }
+                        }
+                        if i != n as usize - 1 {
+                                let mut found = false;
+                                for i_2 in i+1..n { 
+                                    let pipe_2 = matrix[i_2][j];
+                                    if pipe_2 != '.'  {
+                                        let state = (i_2, j, 2);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+    
+                                    }
+                                }
+                                if !found {
+                                    states.push((n - 1, j, 2))
+                                }
                         }
                     }
                     if dir == 0 && i != 0 {
@@ -131,9 +102,9 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
                             states.push((0, j, 0));
                         }
                     }
-                    if dir == 2 && i != matrix.len() as usize - 1 {
+                    if dir == 2 && i != n as usize - 1 {
                         let mut found = false;
-                        for i_2 in i+1..matrix.len() { 
+                        for i_2 in i+1..n { 
                             let pipe_2 = matrix[i_2][j];
                             if pipe_2 != '.'  {
                                 let state = (i_2, j, 2);
@@ -144,7 +115,7 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
                             }
                         }
                         if !found {
-                            states.push((matrix.len() - 1, j, 2))    
+                            states.push((n - 1, j, 2))    
                         }
                     }
                 },
@@ -162,36 +133,36 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
 
                     if dir == 0 || dir == 2 {
                         if j != 0 {
-                            let mut found = false;
-                            for j_2 in (0..=j-1).rev() {
-                                let pipe_2 = matrix[i][j_2];
-                                if pipe_2 != '.'  {
-                                    let state = (i, j_2, 3);
-                                    states.push(state);
-                                    found = true;
-                                    break;
-
+                                let mut found = false;
+                                for j_2 in (0..=j-1).rev() {
+                                    let pipe_2 = matrix[i][j_2];
+                                    if pipe_2 != '.'  {
+                                        let state = (i, j_2, 3);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+    
+                                    }
                                 }
-                            }
-                            if !found {
-                                states.push((i, 0, 3));
-                            }
+                                if !found {
+                                    states.push((i, 0, 3));
+                                }
                         }
-                        if j != matrix[0].len() as usize - 1 {
-                            let mut found = false;
-                            for j_2 in j+1..matrix[0].len() { 
-                                let pipe_2 = matrix[i][j_2];
-                                if pipe_2 != '.'  {
-                                    let state = (i, j_2, 1);
-                                    states.push(state);
-                                    found = true;
-                                    break;
-
+                        if j != m as usize - 1 {
+                                let mut found = false;
+                                for j_2 in j+1..m { 
+                                    let pipe_2 = matrix[i][j_2];
+                                    if pipe_2 != '.'  {
+                                        let state = (i, j_2, 1);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+    
+                                    }
                                 }
-                            }
-                            if !found {
-                                states.push((i, matrix[0].len() - 1, 1))
-                            }
+                                if !found {
+                                    states.push((i, m - 1, 1))
+                                }
                         }
                     }
                     if dir == 3 && j != 0 {
@@ -210,9 +181,9 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
                             states.push((i, 0, 3)); 
                         }
                     }
-                    if dir == 1 && j != matrix[0].len() as usize - 1 {
+                    if dir == 1 && j != m as usize - 1 {
                         let mut found = false;
-                        for j_2 in j+1..matrix[0].len() { 
+                        for j_2 in j+1..m { 
                             let pipe_2 = matrix[i][j_2];
                             if pipe_2 != '.'  {
                                 let state = (i, j_2, 1);
@@ -223,82 +194,82 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
                             }
                         }
                         if !found {
-                            states.push((i, matrix[0].len() - 1, 1));
+                            states.push((i, m - 1, 1));
                         }
                     }
                 },
                 '/' => {
                     match dir {
                         0 => {
-                            if j != matrix[0].len() as usize - 1 {
-                                let mut found = false;
-                                for j_2 in j+1..matrix[0].len() { 
-                                    let pipe_2 = matrix[i][j_2];
-                                    if pipe_2 != '.'  {
-                                        let state = (i, j_2, 1);
-                                    states.push(state);
-                                    found = true;
-                                    break;
-
+                            if j != m as usize - 1 {
+                                    let mut found = false;
+                                    for j_2 in j+1..m { 
+                                        let pipe_2 = matrix[i][j_2];
+                                        if pipe_2 != '.'  {
+                                            let state = (i, j_2, 1);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+    
+                                        }
                                     }
-                                }
-                                if !found {
-                                    states.push((i, matrix[0].len() - 1, 1));
-                                }
+                                    if !found {
+                                        states.push((i, m - 1, 1));
+                                    }
                             }
                         },
                         1 => {
                             if i != 0 {
-                                let mut found = false;
-                                for i_2 in (0..=i-1).rev() {
-                                    let pipe_2 = matrix[i_2][j];
-                                    if pipe_2 != '.'  {
-                                        let state = (i_2, j, 0);
-                                    states.push(state);
-                                    found = true;
-                                    break;
-
+                                    let mut found = false;
+                                    for i_2 in (0..=i-1).rev() {
+                                        let pipe_2 = matrix[i_2][j];
+                                        if pipe_2 != '.'  {
+                                            let state = (i_2, j, 0);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+    
+                                        }
                                     }
-                                }
-                                if !found {
-                                    states.push((0, j, 0))
-                                }
+                                    if !found {
+                                        states.push((0, j, 0))
+                                    }
                             }
                         },
                         2 => {
                             if j != 0 {
-                                let mut found = false;
-                                for j_2 in (0..=j-1).rev() {
-                                    let pipe_2 = matrix[i][j_2];
-                                    if pipe_2 != '.'  {
-                                        let state = (i, j_2, 3);
-                                    states.push(state);
-                                    found = true;
-                                    break;
-
+                                    let mut found = false;
+                                    for j_2 in (0..=j-1).rev() {
+                                        let pipe_2 = matrix[i][j_2];
+                                        if pipe_2 != '.'  {
+                                            let state = (i, j_2, 3);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+    
+                                        }
                                     }
-                                }
-                                if !found {
-                                    states.push((i, 0, 3));
-                                }
+                                    if !found {
+                                        states.push((i, 0, 3));
+                                    }
                             }
                         },
                         3 => {
-                            if i != matrix.len() as usize - 1 {
-                                let mut found = false;
-                                for i_2 in i+1..matrix.len() { 
-                                    let pipe_2 = matrix[i_2][j];
-                                    if pipe_2 != '.'  {
-                                        let state = (i_2, j, 2);
-                                    states.push(state);
-                                    found = true;
-                                    break;
-
+                            if i != n as usize - 1 {
+                                    let mut found = false;
+                                    for i_2 in i+1..n { 
+                                        let pipe_2 = matrix[i_2][j];
+                                        if pipe_2 != '.'  {
+                                            let state = (i_2, j, 2);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+    
+                                        }
                                     }
-                                }
-                                if !found {
-                                    states.push((matrix.len() - 1, j, 2))
-                                }
+                                    if !found {
+                                        states.push((n - 1, j, 2))
+                                    }
                             }
                         },
                         _ => {
@@ -310,74 +281,74 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
                     match dir {
                         0 => {
                             if j != 0 {
-                                let mut found = false;
-                                for j_2 in (0..=j-1).rev() {
-                                    let pipe_2 = matrix[i][j_2];
-                                    if pipe_2 != '.'  {
-                                        let state = (i, j_2, 3);
-                                    states.push(state);
-                                    found = true;
-                                    break;
-
+                                    let mut found = false;
+                                    for j_2 in (0..=j-1).rev() {
+                                        let pipe_2 = matrix[i][j_2];
+                                        if pipe_2 != '.'  {
+                                            let state = (i, j_2, 3);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+    
+                                        }
                                     }
-                                }
-                                if !found {
-                                    states.push((i, 0, 3));
-                                }
+                                    if !found {
+                                        states.push((i, 0, 3));
+                                    }
                             }
                         },
                         1 => {
-                            if i != matrix.len() as usize - 1 {
-                                let mut found = false;
-                                for i_2 in i+1..matrix.len() { 
-                                    let pipe_2 = matrix[i_2][j];
-                                    if pipe_2 != '.'  {
-                                        let state = (i_2, j, 2);
-                                    states.push(state);
-                                    found = true;
-                                    break;
-
+                            if i != n as usize - 1 {
+                                    let mut found = false;
+                                    for i_2 in i+1..n { 
+                                        let pipe_2 = matrix[i_2][j];
+                                        if pipe_2 != '.'  {
+                                            let state = (i_2, j, 2);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+    
+                                        }
                                     }
-                                }
-                                if !found {
-                                    states.push((matrix.len() - 1, j, 2))
-                                }
+                                    if !found {
+                                        states.push((n - 1, j, 2))
+                                    }
                             }
                         },
                         2 => {
-                            if j != matrix[0].len() as usize - 1 {
-                                let mut found = false;
-                                for j_2 in j+1..matrix[0].len() { 
-                                    let pipe_2 = matrix[i][j_2];
-                                    if pipe_2 != '.'  {
-                                        let state = (i, j_2, 1);
-                                    states.push(state);
-                                    found = true;
-                                    break;
-
+                            if j != m as usize - 1 {
+                                    let mut found = false;
+                                    for j_2 in j+1..m { 
+                                        let pipe_2 = matrix[i][j_2];
+                                        if pipe_2 != '.'  {
+                                            let state = (i, j_2, 1);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+    
+                                        }
                                     }
-                                }
-                                if !found {
-                                    states.push((i, matrix[0].len() - 1, 1))
-                                }
+                                    if !found {
+                                        states.push((i, m - 1, 1))
+                                    }
                             }
                         },
                         3 => {
                             if i != 0 {
-                                let mut found = false;
-                                for i_2 in (0..=i-1).rev() {
-                                    let pipe_2 = matrix[i_2][j];
-                                    if pipe_2 != '.'  {
-                                        let state = (i_2, j, 0);
-                                    states.push(state);
-                                    found = true;
-                                    break;
-
+                                    let mut found = false;
+                                    for i_2 in (0..=i-1).rev() {
+                                        let pipe_2 = matrix[i_2][j];
+                                        if pipe_2 != '.'  {
+                                            let state = (i_2, j, 0);
+                                        states.push(state);
+                                        found = true;
+                                        break;
+    
+                                        }
                                     }
-                                }
-                                if !found {
-                                    states.push((0, j, 0));
-                                }
+                                    if !found {
+                                        states.push((0, j, 0));
+                                    }
                             }
                         },
                         _ => {
@@ -385,7 +356,7 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
                         }
                     }
                 },
-                '.' => { // only posib for starting pos
+                '.' => { // only posible for starting pos
                     match dir {
                         0 => {
                             if i != 0 {
@@ -406,9 +377,9 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
                             }
                         },
                         1 => {
-                            if j != matrix[0].len() as usize - 1 {
+                            if j != m as usize - 1 {
                                 let mut found = false;
-                                for j_2 in j+1..matrix[0].len() { 
+                                for j_2 in j+1..m { 
                                     let pipe_2 = matrix[i][j_2];
                                     if pipe_2 != '.'  {
                                         let state = (i, j_2, 1);
@@ -419,14 +390,14 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
                                     }
                                 }
                                 if !found {
-                                    states.push((i, matrix[0].len() - 1, 1))
+                                    states.push((i, m - 1, 1))
                                 }
                             }
                         },
                         2 => {
-                            if i != matrix.len() as usize - 1 {
+                            if i != n as usize - 1 {
                                 let mut found = false;
-                                for i_2 in i+1..matrix.len() { 
+                                for i_2 in i+1..n { 
                                     let pipe_2 = matrix[i_2][j];
                                     if pipe_2 != '.'  {
                                         let state = (i_2, j, 2);
@@ -437,7 +408,7 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
                                     }
                                 }
                                 if !found {
-                                    states.push((matrix.len() - 1, j, 2))
+                                    states.push((n - 1, j, 2))
                                 }
                             }
                         },
@@ -483,8 +454,8 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
         }
     }
 
-    let mut hozir_segments: Vec<Vec<(usize, usize)>> = vec![Vec::new(); matrix.len()];
-    let mut verti_segments: Vec<Vec<(usize, usize)>> = vec![Vec::new(); matrix[0].len()];
+    let mut hozir_segments: Vec<Vec<(usize, usize)>> = vec![Vec::new(); n];
+    let mut verti_segments: Vec<Vec<(usize, usize)>> = vec![Vec::new(); m];
 
     // Gather segments
     for (k, v) in memo {
@@ -512,7 +483,7 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
     }
 
     // Merge segments
-    // Sort segments
+    // Sort
     for line in &mut hozir_segments {
         line.sort();
     }
@@ -520,7 +491,7 @@ fn body(memo: &mut HashMap<(usize, usize, usize), Vec<(usize, usize, usize)>>, m
         col.sort();
     }
 
-    // Merge segments
+    // Merge
     for lines in &mut hozir_segments {
         let mut l = lines.len();
         if l == 0 {
