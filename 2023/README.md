@@ -36,9 +36,9 @@ Here are my solutions for the AoC 2023 problems. I've opted for Rust :crab: this
 | 13  | :white_check_mark:   | :white_check_mark:   |    :x:                 |                         | `1.06ms` - `899µs`   |
 | 14  | :white_check_mark:   | :white_check_mark:   |    :x:                 |                         |  `714µs` - `733ms`   |
 | 15  | :white_check_mark:   | :white_check_mark:   | :x:                 |                         |  `509µs` - `3.55ms`  |
-| 16  |                      |                      |                        |                         |                      |
-| 17  |                      |                      |                        |                         |                      |
-| 18  |                      |                      |                        |                         |                      |
+| 16  | :white_check_mark:   | :clock430:           |                        |                         |                      |
+| 17  | :white_check_mark:   | :clock430:           |                        |                         |                      |
+| 18  | :white_check_mark:   | :white_check_mark:   | :x:                    |                         | `439µs` - `479µs`    |
 | 19  |                      |                      |                        |                         |                      |
 | 20  |                      |                      |                        |                         |                      |
 | 21  |                      |                      |                        |                         |                      |
@@ -130,7 +130,7 @@ And there you have it ! To find the area enclosed by the loop, compute the area 
 We can express $A_o$ as follows, where $v_o$ is the amount of `outside` vertices of the loop, $v_i$ the amount of `inner` vertices, and $l$ is the number of loop elements :
 
 $$
-(*) : A_P = A_{P_-} + \frac{1}{4} [3v_o + v_i + 2(l - v_o - v_i)]
+A_P = A_{P_-} + \frac{1}{4} [3v_o + v_i + 2(l - v_o - v_i)]
 $$
 
 ### $v_o$ and $v_i$
@@ -140,7 +140,7 @@ To find $v_o$ and $v_i$, let's think about how we draw a _only-90 degrees_ polyg
 |-------------------------|---------------------------|---------------------------|---------------------------|
  ![Four](Images/10_4.png) | ![Five](Images/10_5.png)  | ![Six](Images/10_6.png)   | ![Seven](Images/10_7.png) |
 
-If after _Step 3_, if we instead dediced to turn left, we would have had to make $2$ more right turns to complete the shape, this would have looked a bit like so :
+If after _Step 3_, we instead dediced to turn left, we would have had to make $2$ more right turns to complete the shape, this would have looked a bit like so :
 
 | Step 3                        | Step 4                    | Step 5                    | Step 6                    |
 |-------------------------------|---------------------------|---------------------------|---------------------------|
@@ -166,7 +166,7 @@ $$
 v_o = v_i + 4
 $$
 
-This simplifies the equation $(*)$ to :
+This simplifies the previous equation to :
 
 $$
 A_e = A_{P_-} - \frac{l}{2} + 1
