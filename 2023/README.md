@@ -39,7 +39,7 @@ Here are my solutions for the AoC 2023 problems. I've opted for Rust :crab: this
 | 16  | :white_check_mark:   | :white_check_mark:   | :x:                    |                         | `5.46ms` - `854ms`    |
 | 17  | :white_check_mark:   | :clock430:           |                        |                         |                      |
 | 18  | :white_check_mark:   | :white_check_mark:   | :x:                    |                         | `439µs` - `479µs`    |
-| 19  |                      |                      |                        |                         |                      |
+| 19  | :white_check_mark:   | :white_check_mark:   |                        |                         | `5.31ms` - `5.86ms`  |
 | 20  |                      |                      |                        |                         |                      |
 | 21  |                      |                      |                        |                         |                      |
 | 22  |                      |                      |                        |                         |                      |
