@@ -381,7 +381,7 @@ F---L
 F---H
 ```
 
-My idea relied on the fact that the fact that there were only 3 ways to go from one group to the other. The principle is to take a connection randomly and suppose that it is a *fake* connection. Assuming this, each end of the connection is in a separate group. Thus, if we can find another path between the two, then we must have used a second *fake* connection. And if we can find a third path, then we must have used the third *fake* connection. (The third path must be entirely different from the second).
+My idea relied on the fact that there were only 3 ways to go from one group to the other. The principle is to take a connection randomly and suppose that it is a *fake* connection. Assuming this, each end of the connection is in a separate group. Thus, if we can find another path between the two, then we must have used a second *fake* connection. And if we can find a third path, then we must have used the third *fake* connection. (The third path must be entirely different from the second).
 
 What's left to do is to pick a connection from *path 1* and another from *path 2*. Then, if we cut the two connections as well as the first one we picked, and we **still** can reach the two nodes, then at least one of the connections we selected isn't a *fake* one.
 
@@ -514,7 +514,7 @@ F---L
 F---H
 ```
 
-Here it is impossible to link the nodes *7* and *9*, and thus we found the *fake* connections. All there is left to do is to find the size of a group, $k$ and multiply it by $n - k$ where $n$ is the total number of nodes.
+Here it is impossible to link the nodes *7* and *9*, and thus we found the *fake* connections. All that is left to do is to find the size of a group, $k$ and multiply it by $n - k$ where $n$ is the total number of nodes.
 
  <br><br>
 
