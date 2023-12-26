@@ -45,7 +45,7 @@ Here are my solutions for the AoC 2023 problems. I've opted for Rust :crab: this
 | 22  |                      |                      |                        |                         |                      |
 | 23  |                      |                      |                        |                         |                      |
 | 24  |                      |                      |                        |                         |                      |
-| 25  |                      |                      |                        |                         |                      |
+| 25  | :white_check_mark:   | :white_check_mark:   |[:white_check_mark:](#25)| :star: :star:           | `572ms`              |
 
  > Note (*) : Using a single computing time, with a Intel Core i7-13700H (1.8 - 2.4GHz), unoptimized (default rustc build).
 
@@ -185,5 +185,337 @@ $(x_i, y_i)$ are the positions of the vertices of the loop
 
  <br><br>
 
+<a id="25"></a>
+## Day 25
+<br>
+
+This problem was fairly stimulating. To solve it, I considered the input as an undirected graph. With this representation, the problem stated that the graph was divided into two main groups, except that there were 3 *fake* connections between the two groups. The question was to find the *fake* connections. 
+
+Let's illustrate this approach with the example that was given. 
+Firsly, let's rename the components (the nodes of our graph) to make them more readable.
+
+| Input                | Reworked       |
+|----------------------|----------------|
+| jqt: rhn xhk nvd     | 1: 2 3 4       |
+| rsh: frs pzl lsr     | 5: 6 7 8       |
+| xhk: hfx             | 3: 9           |
+| cmg: qnr nvd lhk bvb | 10: 11 4 12 13 |
+| rhn: xhk bvb hfx     | 2: 3 13 9      |
+| bvb: xhk hfx         | 13: 3 9        |
+| pzl: lsr hfx nvd     | 7: 8 9 4       |
+| qnr: nvd             | 11: 4          |
+| ntq: jqt hfx bvb xhk | 14: 1 9 13 3   |
+| nvd: lhk             | 4: 12          |
+| lsr: lhk             | 8: 12          |
+| rzs: qnr cmg lsr rsh | 15: 11 10 8 5  |
+| frs: qnr lhk lsr     | 6: 11 12 8     |
+
+Now, let's draw the corresponding graph.
+
+``` mermaid
+graph TD
+A((1))
+B((2))
+C((3))
+D((4))
+E((5))
+F((6))
+G((7))
+H((8))
+I((9))
+J((10))
+K((11))
+L((12))
+M((13))
+N((14))
+O((15))
+
+A---B
+A---C
+A---D
+E---F
+E---G
+E---H
+C---I
+J---K
+J---D
+J---L
+J---M
+B---C
+B---M
+B---I
+M---C
+M---I
+G---H
+G---I
+G---D
+K---D
+N---A
+N---I
+N---M
+N---C
+D---L
+H---L
+O---K
+O---J
+O---H
+O---E
+F---K
+F---L
+F---H
+```
+
+You may notice that they almost represent two separate groups _One_ and _Two_.
+
+``` mermaid
+graph TD
+A((1))
+B((2))
+C((3))
+D((4))
+E((5))
+F((6))
+G((7))
+H((8))
+I((9))
+J((10))
+K((11))
+L((12))
+M((13))
+N((14))
+O((15))
+
+subgraph Two
+E---F
+E---G
+E---H
+J---K
+J---D
+J---L
+G---H
+G---D
+K---D
+D---L
+H---L
+O---K
+O---J
+O---H
+O---E
+F---K
+F---L
+F---H
+end
+
+subgraph One
+A---B
+A---C
+C---I
+B---C
+B---M
+B---I
+M---C
+M---I
+N---A
+N---I
+N---M
+N---C
+end
+
+A---D
+G---I
+J---M
+```
+
+The *fake* connections are drawn in dotted lines below.
+
+``` mermaid
+graph TD
+A((1))
+B((2))
+C((3))
+D((4))
+E((5))
+F((6))
+G((7))
+H((8))
+I((9))
+J((10))
+K((11))
+L((12))
+M((13))
+N((14))
+O((15))
+
+A---B
+A---C
+A -.- D
+E---F
+E---G
+E---H
+C---I
+J---K
+J---D
+J---L
+J -.- M
+B---C
+B---M
+B---I
+M---C
+M---I
+G---H
+G -.- I
+G---D
+K---D
+N---A
+N---I
+N---M
+N---C
+D---L
+H---L
+O---K
+O---J
+O---H
+O---E
+F---K
+F---L
+F---H
+```
+
+My idea relied on the fact that the fact that there were only 3 ways to go from one group to the other. The principle is to take a connection randomly and suppose that it is a *fake* connection. Assuming this, each end of the connection is in a separate group. Thus, if we can find another path between the two, then we must have used a second *fake* connection. And if we can find a third path, then we must have used the third *fake* connection. (The third path must be entirely different from the second).
+
+What's left to do is to pick a connection from *path 1* and another from *path 2*. Then, if we cut the two connections as well as the first one we picked, and we **still** can reach the two nodes, then at least one of the connections we selected isn't a *fake* one.
+
+The idea is to repeat this process until we find the 3 *fake* connections, and then find the size of each group.
+
+To do this efficiently, once I selected the first connection, *let's name the nodes a and b*, I perform a breadth-first search to get a first path from *a* to *b*, then another to find a path from *b* to *a* without using any node from the first path. This is only possible due to the way the graph is constructed : each node has at least 4 connections, which gives us plenty of ways to link two nodes.
+
+Let's illustrate this. Assume we picked the connection between *7* and *9*, which is indeed *fake*. We found a path from *7* to *9* in *red* : *7 - 4 - 1 - 3 - 9*, and another from *9* to *7* in *green* : *9 - 13 - 10 - 11 - 6 - 5 - 7*. Note that we did use both remaining *fake* connections, which are *1 - 4* and *10 - 13*, and the path are stricly distinct.
+
+ > Note : There is no real reason to look for a second path in the opposite direction, but in the first place I thought that was necessary, and kept it that way because I thought it was cooler.
+
+``` mermaid
+graph TD
+A((1))
+B((2))
+C((3))
+D((4))
+E((5))
+F((6))
+G((7))
+H((8))
+I((9))
+J((10))
+K((11))
+L((12))
+M((13))
+N((14))
+O((15))
+
+A---B
+A---C
+A---D
+E---F
+E---G
+E---H
+C---I
+J---K
+J---D
+J---L
+J---M
+B---C
+B---M
+B---I
+M---C
+M---I
+G---H
+G x-.-x I
+G---D
+K---D
+N---A
+N---I
+N---M
+N---C
+D---L
+H---L
+O---K
+O---J
+O---H
+O---E
+F---K
+F---L
+F---H
+
+style G stroke:#080,fill:#800,stroke-dasharray: 5 5
+style I stroke:#080,fill:#800,stroke-dasharray: 5 5
+
+style A fill:#800
+style C fill:#800
+style D fill:#800
+
+style E stroke:#080,stroke-dasharray: 5 5
+style F stroke:#080,stroke-dasharray: 5 5
+style J stroke:#080,stroke-dasharray: 5 5
+style K stroke:#080,stroke-dasharray: 5 5
+style M stroke:#080,stroke-dasharray: 5 5
+```
+
+Now, if we cut a connection from *path 1* and another from *path 2*, at some point we will reach the following configuration :
+
+``` mermaid
+graph TD
+A((1))
+B((2))
+C((3))
+D((4))
+E((5))
+F((6))
+G((7))
+H((8))
+I((9))
+J((10))
+K((11))
+L((12))
+M((13))
+N((14))
+O((15))
+
+A---B
+A---C
+A x-.-x D
+E---F
+E---G
+E---H
+C---I
+J---K
+J---D
+J---L
+J x-.-x M
+B---C
+B---M
+B---I
+M---C
+M---I
+G---H
+G x-.-x I
+G---D
+K---D
+N---A
+N---I
+N---M
+N---C
+D---L
+H---L
+O---K
+O---J
+O---H
+O---E
+F---K
+F---L
+F---H
+```
+
+Here it is impossible to link the nodes *7* and *9*, and thus we found the *fake* connections. All there is left to do is to find the size of a group, $k$ and multiply it by $n - k$ where $n$ is the total number of nodes.
+
+ <br><br>
 
 :octocat:
